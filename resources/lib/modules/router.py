@@ -190,9 +190,11 @@ def dispatch(params):
 
             from resources.lib.modules import player
 
-            player.SerenPlayer().play_source(
+            seren_player = player.SerenPlayer()
+            seren_player.play_source(
                 stream_link, item_information, resume_time=resume_time
             )
+            del seren_player
 
         except NoPlayableSourcesException:
             try:
