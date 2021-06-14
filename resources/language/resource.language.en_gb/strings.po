@@ -3209,6 +3209,21 @@ msgstr ""
 "Invalid Trakt API keys, your authentication has been reset.\n"
 "Please re-auth your Trakt account."
 
+#: \resources\settings.xml:396 \resources\lib\gui\tvshowMenus.py:184
+msgctxt "#25578"
+msgid "Next Up Sort Direction"
+msgstr "Next Up Sort Direction"
+
+#: \resources\settings.xml:230
+msgctxt "#25136"
+msgid "Minimum Movie Sources"
+msgstr "Minimum Movie Sources"
+
+#: \resources\settings.xml:231
+msgctxt "#25579"
+msgid "Minimum TV Shows Sources"
+msgstr "Minimum TV Shows Sources"
+
 msgctxt "#25581"
 msgid "Collection Sort Style"
 msgstr "Collection Sort Style"
