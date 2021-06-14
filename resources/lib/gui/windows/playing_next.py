@@ -20,7 +20,7 @@ class PlayingNext(BaseWindow):
             self.playing_file = self.getPlayingFile()
             self.duration = self.getTotalTime() - self.getTime()
             self.closed = False
-        except:
+        except Exception:
             g.log_stacktrace()
 
     # region player methods
@@ -109,7 +109,7 @@ class PlayingNext(BaseWindow):
         try:
             try:
                 progress_bar = self.getControlProgress(3014)
-            except:
+            except Exception:
                 progress_bar = None
 
             while (
@@ -137,7 +137,7 @@ class PlayingNext(BaseWindow):
         """
         try:
             super(PlayingNext, self).doModal()
-        except:
+        except Exception:
             g.log_stacktrace()
 
     def close(self):

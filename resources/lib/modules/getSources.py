@@ -82,7 +82,7 @@ class Sources(object):
         self.window = SourceWindowAdapter(self.item_information, self)
         self.session = requests.Session()
 
-        self.silent = g.get_bool_setting('general.tempSilent')
+        self.silent = g.get_bool_runtime_setting('tempSilent')
 
     def get_sources(self):
         """
@@ -978,7 +978,7 @@ class TorrentCacheCheck:
                     g.log('KeyError in AllDebrid Cache check worker. '
                           'Failed to walk AllDebrid cache check response, check your auth and account status', 'error')
                     return
-        except:
+        except Exception:
             g.log_stacktrace()
 
     def _realdebrid_worker(self, torrent_list, info):
@@ -999,7 +999,7 @@ class TorrentCacheCheck:
                             self._handle_movie_rd_worker(i, real_debrid_cache)
                 except KeyError:
                     pass
-        except:
+        except Exception:
             g.log_stacktrace()
 
     def _handle_movie_rd_worker(self, source, real_debrid_cache):
@@ -1034,7 +1034,7 @@ class TorrentCacheCheck:
                     i['debrid_provider'] = 'premiumize'
                     self.store_torrent(i)
                 count += 1
-        except:
+        except Exception:
             g.log_stacktrace()
 
 class SourceWindowAdapter(object):
@@ -1044,7 +1044,7 @@ class SourceWindowAdapter(object):
 
     def __init__(self, item_information, scraper_sclass):
         self.trakt_id = 0
-        self.silent = g.get_bool_setting('general.tempSilent')
+        self.silent = g.get_bool_runtime_setting('tempSilent')
 
         try:
             self.display_style = g.get_int_setting('general.scrapedisplay')
