@@ -433,6 +433,8 @@ class Menus:
             page=g.PAGE,
             extended="full",
             field="title",
+            hide_unaired=False,
+            hide_watched=False
         )
 
         if not trakt_list:
@@ -443,7 +445,9 @@ class Menus:
                 show
                 for show in trakt_list
                 if float(show["trakt_object"]["info"]["score"]) > 0
-            ]
+            ],
+            hide_unaired=False,
+            hide_watched=False
         )
 
     def shows_by_actor(self, query):
