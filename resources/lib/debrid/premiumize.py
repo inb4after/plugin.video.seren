@@ -21,12 +21,12 @@ class Premiumize:
     """
     Wrapper to handle calls to Premiumize API
     """
-    client_id = "288300453"
-    client_secret = "2jw9suzfdue2t7eq46"
+    client_id = "662875953"
+    client_secret = "xmg33m74n6t6x8phun"
 
     def __init__(self):
         self.headers = {
-            "Authorization": "Bearer {}".format(g.get_setting(PM_TOKEN_KEY))
+            "Authorization": "Bearer {}".format(g.get_setting(PM_TOKEN_KEY)),
         }
         self.premiumize_transfers = PremiumizeTransfers()
         self.progress_dialog = xbmcgui.DialogProgress()
@@ -44,7 +44,6 @@ class Premiumize:
             message = "Premiumize API error: {}".format(request.json().get("message"))
             g.notification(g.ADDON_NAME, message)
             g.log(message, "error")
-            g.log(request.request.headers)
         return request
 
     def auth(self):
@@ -62,7 +61,7 @@ class Premiumize:
         success = False
         tools.copy2clip(token["user_code"])
         self.progress_dialog.create(
-            g.ADDON_NAME + ": " + g.get_language_string(30377),
+            g.ADDON_NAME + ": " + g.get_language_string(30371),
             tools.create_multiline_message(
                 line1=g.get_language_string(30018).format(
                     g.color_string(token["verification_uri"])
@@ -162,7 +161,7 @@ class Premiumize:
         :rtype: list
         """
         url = "/folder/list"
-        post_data = {"id": folder_id}
+        post_data = {"id": folder_id} if folder_id else None
         response = self.post_url(url, post_data)
         return response["content"]
 
@@ -174,7 +173,8 @@ class Premiumize:
         """
         url = "/item/listall"
         response = self.get_url(url)
-        return response["files"]
+        files = response.get("files")
+        return files if isinstance(files, list) else []
 
     def hash_check(self, hash_list):
         """
@@ -252,14 +252,14 @@ class Premiumize:
     def get_used_space(self):
         """
         Fetches the currently used space for the users account
-        :return: Current space used in MB
-        :rtype: int
+        :return: Current space used in GB
+        :rtype: float
         """
         info = self.account_info()
         if not info:
             g.log("Failed to get used space for Premiumize account", "error")
-            return 0
-        used_space = int(((info["space_used"] / 1024) / 1024) / 1024)
+            return 0.0
+        used_space = info["space_used"] * 1000.0  # Size returned is in TB (not TiB) we want GB
         return used_space
 
     def hoster_cache_check(self, source_list):

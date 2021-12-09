@@ -23,7 +23,6 @@ class ProviderPackages(BaseWindow):
         self.package_list = self.getControlList(1000)
 
         self.fill_packages()
-        self.setFocus(self.package_list)
 
     def refresh_data(self):
         self.providers_class.poll_database()
@@ -81,7 +80,7 @@ class ProviderPackages(BaseWindow):
                 package = self.package_list.getSelectedItem().getLabel()
                 g.show_busy_dialog()
                 try:
-                    confirm = xbmcgui.Dialog().yesno(g.ADDON_NAME, g.get_language_string(30289).format(package))
+                    confirm = xbmcgui.Dialog().yesno(g.ADDON_NAME, g.get_language_string(30283).format(package))
                     if not confirm:
                         g.close_busy_dialog()
                         return
