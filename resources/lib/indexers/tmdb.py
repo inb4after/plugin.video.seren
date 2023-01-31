@@ -265,11 +265,6 @@ class TMDBAPI(ApiBase):
                 "keyart",
                 lambda x: x["iso_639_1"] == "xx" or x["iso_639_1"] is None,
             ),
-            (
-                "logos",
-                "clearlogo",
-                lambda x: x["iso_639_1"] != "xx" and x["iso_639_1"] is not None,
-            ),
             ("stills", "fanart", None),
         ]
 
@@ -316,7 +311,6 @@ class TMDBAPI(ApiBase):
             {
                 "fanart": fanart,
                 "poster": poster,
-                "clearlogo": poster,
                 "keyart": poster,
                 "thumb": thumb,
                 "icon": icon,
