@@ -46,7 +46,13 @@ class RealDebridResolver(TorrentResolverBase):
     def _get_selected_files(self, torrent_id):
         info = self.debrid_module.torrent_info(torrent_id)
         files = [i for i in info["files"] if i["selected"]]
-        [i.update({"link": info["links"][idx]}) for idx, i in enumerate(files)]
+        if len(files) > len(info["links"]):
+            raise FileIdentification(f"Mismatch between number of selected files and links: {len(files)} files, {len(info['links'])} links")
+        for idx, i in enumerate(files):
+            if idx < len(info["links"]):
+                i.update({"link": info["links"][idx]})
+            else:
+                raise FileIdentification(f"No link available for file index {idx}")
         return files
 
     def _fetch_source_files(self, torrent, item_information):
