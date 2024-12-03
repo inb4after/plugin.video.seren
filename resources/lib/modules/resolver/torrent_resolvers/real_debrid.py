@@ -52,7 +52,7 @@ class RealDebridResolver(TorrentResolverBase):
     def _fetch_source_files(self, torrent, item_information):
         hash_check = self._get_files_from_check_hash(torrent, item_information)
         cached_torrent = self.debrid_module.add_magnet(torrent["magnet"])
-        self.debrid_module.torrent_select(cached_torrent["id"], ",".join([i["idx"] for i in hash_check]))
+        self.debrid_module.torrent_select_all(cached_torrent["id"])
         self.torrent_id = cached_torrent["id"]
         return self._get_selected_files(self.torrent_id)
 
