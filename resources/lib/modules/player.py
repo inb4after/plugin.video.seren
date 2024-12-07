@@ -651,7 +651,7 @@ class SerenPlayer(xbmc.Player):
 
     def _default_action(self):
         if (
-            int(self.getTotalTime()) - int(self.getTime()) == 1
+            float(self.getTotalTime()) - float(self.getTime()) <= 1.5
             and self._is_file_playing()
             and not g.abort_requested()
         ):
