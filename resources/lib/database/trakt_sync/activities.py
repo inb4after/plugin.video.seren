@@ -304,7 +304,7 @@ class TraktSyncDatabase(trakt_sync.TraktSyncDatabase):
     def sync_watched_episodes(self):
         try:
             get = MetadataHandler.get_trakt_info
-            trakt_watched = self.trakt_api.get_json("sync/watched/shows", extended="full")
+            trakt_watched = self.trakt_api.get_json("sync/watched/shows", extended="full,progress")
             if not trakt_watched:
                 return
             self.insert_trakt_shows(trakt_watched)
