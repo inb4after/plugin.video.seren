@@ -887,7 +887,7 @@ class TraktSyncDatabase(trakt_sync.TraktSyncDatabase):
         if sort_by == 0:
             sort_by = "e.air_date"
         elif sort_by == 1:
-            sort_by = "inner.last_watched_at"
+            sort_by = "inner_episodes.last_watched_at"
 
         if sort_direction == 0:
             sort_direction = "ASC"
